@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SeqDivA</class>
+ <widget class="QMainWindow" name="SeqDivA">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>696</width>
+    <height>430</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SeqDivA - Sequence Diversity Analysis</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTextEdit" name="FastaText">
+      <property name="font">
+       <font>
+        <family>Bitstream Vera Sans Mono</family>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="lineWrapColumnOrWidth">
+       <number>80</number>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="acceptRichText">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="value">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="calculate">
+        <property name="text">
+         <string>Calculate Similarity</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clear">
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Close">
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>696</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionOpen_Fasta"/>
+    <addaction name="actionSplit_Rose"/>
+    <addaction name="separator"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <widget class="QMenu" name="menuMatrix">
+    <property name="title">
+     <string>&amp;Matrix</string>
+    </property>
+    <widget class="QMenu" name="menuMatrixtype">
+     <property name="title">
+      <string>&amp;Method</string>
+     </property>
+     <addaction name="needle"/>
+     <addaction name="water"/>
+    </widget>
+    <widget class="QMenu" name="identity">
+     <property name="title">
+      <string>&amp;Calculate</string>
+     </property>
+     <addaction name="actionIdentity"/>
+     <addaction name="similarity"/>
+    </widget>
+    <addaction name="menuMatrixtype"/>
+    <addaction name="identity"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuMatrix"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen_Fasta">
+   <property name="text">
+    <string>Open &amp;Fasta</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="needle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;needle</string>
+   </property>
+  </action>
+  <action name="water">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;water</string>
+   </property>
+  </action>
+  <action name="actionIdentity">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Identity Matrix</string>
+   </property>
+  </action>
+  <action name="similarity">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Similarity Matrix</string>
+   </property>
+  </action>
+  <action name="actionSplit_Rose">
+   <property name="text">
+    <string>Split &amp;Rose</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>Close</sender>
+   <signal>clicked()</signal>
+   <receiver>SeqDivA</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>643</x>
+     <y>384</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered()</signal>
+   <receiver>SeqDivA</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>214</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
