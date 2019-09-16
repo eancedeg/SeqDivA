@@ -178,9 +178,15 @@ class Window(QtWidgets.QMainWindow):
         self.ui.progressBar.setValue(0)
 
     def blastfinish(self, result):
-        self.ui.calculate.setDisabled(False)
+        self.ui.progressBar.setValue(0)
         self.ui.progressBar.setRange(0, 100)
-        print(result)
+        matrix = MatrixWin()
+
+        matrix.filltable(result.to_numpy())
+        matrix.data = result.to_numpy()
+
+        matrix.exec_()
+        self.ui.calculate.setDisabled(False)
 
 
 

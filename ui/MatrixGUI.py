@@ -19,9 +19,9 @@ class MatrixWin(QtWidgets.QDialog):
 
     def filltable(self, matrix):
         self.ui.matrix.setRowCount(len(matrix))
-        self.ui.matrix.setColumnCount(len(matrix[0]))
+        self.ui.matrix.setColumnCount(len(matrix))
         for i in range(len(matrix)):
-            for j in range(len(matrix[0])):
+            for j in range(len(matrix)):
                 item = QTableWidgetItem()
                 item.setTextAlignment(QtCore.Qt.AlignCenter)
                 item.setText(str(matrix[i][j]))
