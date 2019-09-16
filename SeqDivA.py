@@ -1,5 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 from ui.SeqDivAGUI import Ui_SeqDivA
 from ui.MatrixGUI import MatrixWin
 from Bio import SeqIO
@@ -75,6 +76,8 @@ class Window(QtWidgets.QMainWindow):
         self.ui.identity.triggered.connect(self.identityaction)
         self.ui.similarity.triggered.connect(self.similarityaction)
         self.ui.calculate.clicked.connect(self.calculate)
+        self.ui.actionbitscores.triggered.connect(self.bitscoreaction)
+        self.ui.diamond.triggered.connect(self.diamondaction)
         self.threadWorker.prog_range.connect(self.progressrange)
         self.threadWorker.progress.connect(self.setprogress)
         self.threadWorker.onfinished.connect(self.results)
@@ -98,28 +101,48 @@ class Window(QtWidgets.QMainWindow):
 
     def wateraction(self):
         self.ui.needle.setChecked(False)
+        self.ui.diamond.setChecked(False)
         self.calculation_method = 'water'
 
     def needleaction(self):
         self.ui.water.setChecked(False)
+        self.ui.diamond.setChecked(False)
         self.calculation_method = 'needle'
+
+    def diamondaction(self):
+        self.ui.water.setChecked(False)
+        self.ui.needle.setChecked(False)
+        self.calculation_method = 'diamond'
 
     def identityaction(self):
         self.ui.similarity.setChecked(False)
+        self.ui.actionbitscores.setChecked(False)
+        self.ui.actionIdentity.setChecked(True)
         self.ui.calculate.setText('Calculate Identity')
         self.matrix_type = 'identity'
 
     def similarityaction(self):
         self.ui.actionIdentity.setChecked(False)
+        self.ui.actionbitscores.setChecked(False)
         self.ui.similarity.setChecked(True)
         self.ui.calculate.setText('Calculate Similarity')
         self.matrix_type = 'similarity'
 
+    def bitscoreaction(self):
+        self.ui.actionbitscores.setChecked(True)
+        self.ui.actionIdentity.setChecked(False)
+        self.ui.similarity.setChecked(False)
+        self.ui.calculate.setText('Calculate Bit-Scores Matrix')
+        self.matrix_type = 'bitscores'
+
     def calculate(self):
-        self.ui.calculate.setDisabled(True)
-        self.threadWorker.fasta = self.file
-        self.threadWorker.method = self.calculation_method
-        self.threadWorker.start()
+        if not self.file:
+            QMessageBox.warning(self, "Warning", "Please, open file first!!!")
+        else:
+            self.ui.calculate.setDisabled(True)
+            self.threadWorker.fasta = self.file
+            self.threadWorker.method = self.calculation_method
+            self.threadWorker.start()
 
     def results(self, result):
         matrix = MatrixWin()

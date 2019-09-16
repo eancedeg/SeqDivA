@@ -75,7 +75,7 @@
      <x>0</x>
      <y>0</y>
      <width>696</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -97,6 +97,7 @@
      </property>
      <addaction name="needle"/>
      <addaction name="water"/>
+     <addaction name="diamond"/>
     </widget>
     <widget class="QMenu" name="identity">
      <property name="title">
@@ -104,6 +105,7 @@
      </property>
      <addaction name="actionIdentity"/>
      <addaction name="similarity"/>
+     <addaction name="actionbitscores"/>
     </widget>
     <addaction name="menuMatrixtype"/>
     <addaction name="identity"/>
@@ -184,6 +186,22 @@
   <action name="actionAbout">
    <property name="text">
     <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="diamond">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>diamond blast</string>
+   </property>
+  </action>
+  <action name="actionbitscores">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Bit-scores Matrix</string>
    </property>
   </action>
  </widget>

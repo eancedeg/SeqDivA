@@ -3,5 +3,5 @@ Sequence Diversity Analysis
 
 Authors
 -------
-* Evys Ancede Gallardo (eancedeg@gmail.com)
-* Guillermín Agüero Chapín (gaguero@gmail.com)
+* Evys Ancede-Gallardo (eancedeg@gmail.com)
+* Guillermin Agüero-Chapin (gaguero@gmail.com)

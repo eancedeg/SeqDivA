@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'SeqDivAGUI.ui'
 #
-# Created by: PyQt5 UI code generator 5.5.1
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -45,7 +45,7 @@ class Ui_SeqDivA(object):
         self.verticalLayout.addLayout(self.horizontalLayout)
         SeqDivA.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(SeqDivA)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 696, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 696, 20))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -83,14 +83,22 @@ class Ui_SeqDivA(object):
         self.actionSplit_Rose.setObjectName("actionSplit_Rose")
         self.actionAbout = QtWidgets.QAction(SeqDivA)
         self.actionAbout.setObjectName("actionAbout")
+        self.diamond = QtWidgets.QAction(SeqDivA)
+        self.diamond.setCheckable(True)
+        self.diamond.setObjectName("diamond")
+        self.actionbitscores = QtWidgets.QAction(SeqDivA)
+        self.actionbitscores.setCheckable(True)
+        self.actionbitscores.setObjectName("actionbitscores")
         self.menuFile.addAction(self.actionOpen_Fasta)
         self.menuFile.addAction(self.actionSplit_Rose)
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionClose)
         self.menuMatrixtype.addAction(self.needle)
         self.menuMatrixtype.addAction(self.water)
+        self.menuMatrixtype.addAction(self.diamond)
         self.identity.addAction(self.actionIdentity)
         self.identity.addAction(self.similarity)
+        self.identity.addAction(self.actionbitscores)
         self.menuMatrix.addAction(self.menuMatrixtype.menuAction())
         self.menuMatrix.addAction(self.identity.menuAction())
         self.menuAbout.addAction(self.actionAbout)
@@ -125,4 +133,6 @@ class Ui_SeqDivA(object):
         self.actionSplit_Rose.setText(_translate("SeqDivA", "Split &Rose"))
         self.actionSplit_Rose.setShortcut(_translate("SeqDivA", "Ctrl+R"))
         self.actionAbout.setText(_translate("SeqDivA", "&About"))
+        self.diamond.setText(_translate("SeqDivA", "diamond blast"))
+        self.actionbitscores.setText(_translate("SeqDivA", "Bit-scores Matrix"))
 
