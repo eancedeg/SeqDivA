@@ -67,6 +67,49 @@
       </item>
      </layout>
     </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Matrix Type:</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="similarity">
+         <property name="text">
+          <string>Similarity</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="actionIdentity">
+         <property name="text">
+          <string>Identity</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="actionbitscores">
+         <property name="text">
+          <string>Bit-Scores</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -89,7 +132,7 @@
    </widget>
    <widget class="QMenu" name="menuMatrix">
     <property name="title">
-     <string>&amp;Matrix</string>
+     <string>Methods</string>
     </property>
     <widget class="QMenu" name="menuMatrixtype">
      <property name="title">
@@ -99,16 +142,7 @@
      <addaction name="water"/>
      <addaction name="diamond"/>
     </widget>
-    <widget class="QMenu" name="identity">
-     <property name="title">
-      <string>&amp;Calculate</string>
-     </property>
-     <addaction name="actionIdentity"/>
-     <addaction name="similarity"/>
-     <addaction name="actionbitscores"/>
-    </widget>
     <addaction name="menuMatrixtype"/>
-    <addaction name="identity"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">

@@ -73,10 +73,10 @@ class Window(QtWidgets.QMainWindow):
         self.ui.clear.clicked.connect(self.clear)
         self.ui.water.triggered.connect(self.wateraction)
         self.ui.needle.triggered.connect(self.needleaction)
-        self.ui.identity.triggered.connect(self.identityaction)
-        self.ui.similarity.triggered.connect(self.similarityaction)
+        self.ui.actionIdentity.toggled.connect(self.identityaction)
+        self.ui.similarity.toggled.connect(self.similarityaction)
         self.ui.calculate.clicked.connect(self.calculate)
-        self.ui.actionbitscores.triggered.connect(self.bitscoreaction)
+        self.ui.actionbitscores.toggled.connect(self.bitscoreaction)
         self.ui.diamond.triggered.connect(self.diamondaction)
         self.threadWorker.prog_range.connect(self.progressrange)
         self.threadWorker.progress.connect(self.setprogress)
@@ -102,37 +102,31 @@ class Window(QtWidgets.QMainWindow):
     def wateraction(self):
         self.ui.needle.setChecked(False)
         self.ui.diamond.setChecked(False)
+        self.ui.similarity.setDisabled(False)
         self.calculation_method = 'water'
 
     def needleaction(self):
         self.ui.water.setChecked(False)
         self.ui.diamond.setChecked(False)
+        self.ui.similarity.setDisabled(False)
         self.calculation_method = 'needle'
 
     def diamondaction(self):
         self.ui.water.setChecked(False)
         self.ui.needle.setChecked(False)
+        self.ui.similarity.setDisabled(True)
         self.calculation_method = 'diamond'
 
     def identityaction(self):
-        self.ui.similarity.setChecked(False)
-        self.ui.actionbitscores.setChecked(False)
-        self.ui.actionIdentity.setChecked(True)
         self.ui.calculate.setText('Calculate Identity')
         self.matrix_type = 'identity'
 
     def similarityaction(self):
-        self.ui.actionIdentity.setChecked(False)
-        self.ui.actionbitscores.setChecked(False)
-        self.ui.similarity.setChecked(True)
         self.ui.calculate.setText('Calculate Similarity')
         self.matrix_type = 'similarity'
 
     def bitscoreaction(self):
-        self.ui.actionbitscores.setChecked(True)
-        self.ui.actionIdentity.setChecked(False)
-        self.ui.similarity.setChecked(False)
-        self.ui.calculate.setText('Calculate Bit-Scores Matrix')
+        self.ui.calculate.setText('Calculate Bit-Scores')
         self.matrix_type = 'bitscores'
 
     def calculate(self):
