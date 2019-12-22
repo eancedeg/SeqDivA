@@ -5,6 +5,7 @@ from ui.SeqDivAGUI import Ui_SeqDivA
 from ui.MatrixGUI import MatrixWin
 from Bio import SeqIO
 from calculate.FileManager import matrix_header, data_extractor, cuadrate_matrix
+from calculate.blast import BlastCalculation
 import numpy as np
 import os
 
@@ -67,6 +68,8 @@ class Window(QtWidgets.QMainWindow):
 
         # Threads
         self.threadWorker = Calculation(self.calculation_method, self.file)
+        self.blastthread = BlastCalculation(self.calculation_method, self.file)
+
 
         # Events
         self.ui.actionOpen_Fasta.triggered.connect(self.openfasta)
@@ -77,10 +80,11 @@ class Window(QtWidgets.QMainWindow):
         self.ui.similarity.toggled.connect(self.similarityaction)
         self.ui.calculate.clicked.connect(self.calculate)
         self.ui.actionbitscores.toggled.connect(self.bitscoreaction)
-        self.ui.diamond.triggered.connect(self.diamondaction)
+        self.ui.blast.triggered.connect(self.blastaction)
         self.threadWorker.prog_range.connect(self.progressrange)
         self.threadWorker.progress.connect(self.setprogress)
         self.threadWorker.onfinished.connect(self.results)
+        self.blastthread.onfinished.connect(self.blastfinish)
 
     def setprogress(self, i):
         self.ui.progressBar.setValue(i)
@@ -101,29 +105,45 @@ class Window(QtWidgets.QMainWindow):
 
     def wateraction(self):
         self.ui.needle.setChecked(False)
-        self.ui.diamond.setChecked(False)
-        self.ui.similarity.setDisabled(False)
+        self.ui.blast.setChecked(False)
+        self.ui.similarity.setText('Similarity')
+        self.ui.actionbitscores.setDisabled(True)
         self.calculation_method = 'water'
+        if self.ui.similarity.isChecked():
+            self.ui.calculate.setText('Calculate similarity')
+            self.matrix_type = 'similarity'
 
     def needleaction(self):
         self.ui.water.setChecked(False)
-        self.ui.diamond.setChecked(False)
-        self.ui.similarity.setDisabled(False)
+        self.ui.blast.setChecked(False)
+        self.ui.similarity.setText('Similarity')
+        self.ui.actionbitscores.setDisabled(True)
         self.calculation_method = 'needle'
+        if self.ui.similarity.isChecked():
+            self.ui.calculate.setText('Calculate similarity')
+            self.matrix_type = 'similarity'
 
-    def diamondaction(self):
+    def blastaction(self):
         self.ui.water.setChecked(False)
         self.ui.needle.setChecked(False)
-        self.ui.similarity.setDisabled(True)
-        self.calculation_method = 'diamond'
+        self.ui.similarity.setText('Raw-scores')
+        self.ui.actionbitscores.setDisabled(False)
+        self.calculation_method = 'blast'
+        if self.ui.similarity.isChecked():
+            self.ui.calculate.setText('Calculate Raw-scores')
+            self.matrix_type = 'raw-scores'
 
     def identityaction(self):
         self.ui.calculate.setText('Calculate Identity')
         self.matrix_type = 'identity'
 
     def similarityaction(self):
-        self.ui.calculate.setText('Calculate Similarity')
-        self.matrix_type = 'similarity'
+        if self.ui.blast.isChecked():
+            self.ui.calculate.setText('Calculate Raw-scores')
+            self.matrix_type = 'raw-scores'
+        else:
+            self.ui.calculate.setText('Calculate Similarity')
+            self.matrix_type = 'similarity'
 
     def bitscoreaction(self):
         self.ui.calculate.setText('Calculate Bit-Scores')
@@ -134,9 +154,15 @@ class Window(QtWidgets.QMainWindow):
             QMessageBox.warning(self, "Warning", "Please, open file first!!!")
         else:
             self.ui.calculate.setDisabled(True)
-            self.threadWorker.fasta = self.file
-            self.threadWorker.method = self.calculation_method
-            self.threadWorker.start()
+            if self.ui.blast.isChecked():
+                self.blastthread.fasta = self.file
+                self.blastthread.matrix_type = self.matrix_type
+                self.ui.progressBar.setRange(0, 0)
+                self.blastthread.start()
+            else:
+                self.threadWorker.fasta = self.file
+                self.threadWorker.method = self.calculation_method
+                self.threadWorker.start()
 
     def results(self, result):
         matrix = MatrixWin()
@@ -150,6 +176,12 @@ class Window(QtWidgets.QMainWindow):
         matrix.exec_()
         self.ui.calculate.setDisabled(False)
         self.ui.progressBar.setValue(0)
+
+    def blastfinish(self, result):
+        self.ui.calculate.setDisabled(False)
+        self.ui.progressBar.setRange(0, 100)
+        print(result)
+
 
 
 if __name__ == '__main__':

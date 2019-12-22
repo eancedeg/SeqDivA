@@ -2,3 +2,4 @@
 .idea/inspectionProfiles/
 calculate/__pycache__/
 ui/__pycache__/
+/examples/output.csv

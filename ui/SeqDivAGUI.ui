@@ -78,6 +78,9 @@
          <property name="text">
           <string>Similarity</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -89,6 +92,9 @@
        </item>
        <item>
         <widget class="QRadioButton" name="actionbitscores">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Bit-Scores</string>
          </property>
@@ -118,7 +124,7 @@
      <x>0</x>
      <y>0</y>
      <width>696</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -140,7 +146,7 @@
      </property>
      <addaction name="needle"/>
      <addaction name="water"/>
-     <addaction name="diamond"/>
+     <addaction name="blast"/>
     </widget>
     <addaction name="menuMatrixtype"/>
    </widget>
@@ -222,12 +228,12 @@
     <string>&amp;About</string>
    </property>
   </action>
-  <action name="diamond">
+  <action name="blast">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>diamond blast</string>
+    <string>blast</string>
    </property>
   </action>
   <action name="actionbitscores">
