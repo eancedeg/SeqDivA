@@ -189,6 +189,7 @@ class Window(QtWidgets.QMainWindow):
         self.ui.calculate.setDisabled(False)
 
 
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     win = Window(None)
