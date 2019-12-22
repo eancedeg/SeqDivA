@@ -58,4 +58,4 @@ class BlastCalculation(QtCore.QThread):
 
         pivoted_round = pivoted.round(2)
 
-        self.onfinished.emit(pivoted)
+        self.onfinished.emit(pivoted_round)
