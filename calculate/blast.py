@@ -56,4 +56,6 @@ class BlastCalculation(QtCore.QThread):
         os.remove('{}.pin'.format(self.fasta))
         os.remove('{}.psq'.format(self.fasta))
 
+        pivoted_round = pivoted.round(2)
+
         self.onfinished.emit(pivoted)
