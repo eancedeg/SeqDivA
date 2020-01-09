@@ -42,15 +42,9 @@ Installation:
 
  Authors:
 
--       Evys Ancede-Gallardo (eancedeg@gmail.com), Programa de Doctorado en Fisicoquímica Molecular, Facultad de Ciencias
-
-     Exactas, Universidad Andrés Bello, Chile
+-       Evys Ancede-Gallardo (eancedeg@gmail.com), Programa de Doctorado en Fisicoquímica Molecular, Facultad de Ciencias Exactas, Universidad Andrés Bello, Av. República 275, Santiago 8370146, Chile.
 
 
--       Guillermin Agüero-Chapin (gaguero@gmail.com), CIIMAR- Centro Interdisciplinar de Investigação Marinha e Ambiental,
+-       Guillermin Agüero-Chapin (gaguero@gmail.com), CIIMAR- Centro Interdisciplinar de Investigação Marinha e Ambiental, Universidade do Porto, Portugal
 
-     Universidade do Porto, Portugal
-
- 
-
-Reference: Agüero-Chapin G, Galpert D, Molina-Ruiz, Ancede-Gallardo E, Pérez-Machado G, de la Riva GA and Antunes A (2019). Graph Theory-Based Sequence Descriptors as Remote Homology Predictors. Biomolecules, Accepted for publication
+Reference: Agüero-Chapin, G., Galpert, D., Molina-Ruiz, R., Ancede-Gallardo, E., Pérez-Machado, G., De la Riva, G. A., & Antunes, A. (2019). Graph Theory-Based Sequence Descriptors as Remote Homology Predictors. Biomolecules, 10(1), 26. https://doi.org/10.3390/biom10010026
