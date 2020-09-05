@@ -85,6 +85,8 @@ class Window(QtWidgets.QMainWindow):
         self.threadWorker.progress.connect(self.setprogress)
         self.threadWorker.onfinished.connect(self.results)
         self.blastthread.onfinished.connect(self.blastfinish)
+        self.blastthread.onincompletedata.connect(self.incompletedata)
+        self.blastthread.onblastincomplete.connect(self.blastincomplete)
 
     def setprogress(self, i):
         self.ui.progressBar.setValue(i)
@@ -188,6 +190,17 @@ class Window(QtWidgets.QMainWindow):
         matrix.exec_()
         self.ui.calculate.setDisabled(False)
 
+    def incompletedata(self, text):
+        QMessageBox.warning(self, "Warning", text)
+        self.ui.progressBar.setValue(0)
+        self.ui.progressBar.setRange(0, 100)
+        self.ui.calculate.setDisabled(False)
+
+    def blastincomplete(self, text):
+        QMessageBox.warning(self, "Warning", text)
+        self.ui.progressBar.setValue(0)
+        self.ui.progressBar.setRange(0, 100)
+        self.ui.calculate.setDisabled(False)
 
 
 if __name__ == '__main__':
