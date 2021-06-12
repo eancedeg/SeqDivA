@@ -1,0 +1,10 @@
+name: SeqDivA
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - biopython==1.77
+  - ipython
+  - matplotlib=3.3.1
+  - pandas
+prefix: /home/eancedeg/miniconda3/envs/SeqDivA

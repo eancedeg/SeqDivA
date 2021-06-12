@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea/inspectionProfiles/
+.idea/
 calculate/__pycache__/
 ui/__pycache__/
 /examples/output.csv
