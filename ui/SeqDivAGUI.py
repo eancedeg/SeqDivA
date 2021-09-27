@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'SeqDivAGUI.ui'
+# Form implementation generated from reading ui file 'ui/SeqDivAGUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -43,6 +43,18 @@ class Ui_SeqDivA(object):
         self.Close.setObjectName("Close")
         self.horizontalLayout.addWidget(self.Close)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
+        self.groupBox_2.setObjectName("groupBox_2")
+        self.protein = QtWidgets.QRadioButton(self.groupBox_2)
+        self.protein.setGeometry(QtCore.QRect(12, 30, 68, 21))
+        self.protein.setChecked(True)
+        self.protein.setObjectName("protein")
+        self.dna = QtWidgets.QRadioButton(self.groupBox_2)
+        self.dna.setGeometry(QtCore.QRect(86, 30, 53, 21))
+        self.dna.setObjectName("dna")
+        self.horizontalLayout_4.addWidget(self.groupBox_2)
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.groupBox)
@@ -58,12 +70,11 @@ class Ui_SeqDivA(object):
         self.actionbitscores.setEnabled(False)
         self.actionbitscores.setObjectName("actionbitscores")
         self.horizontalLayout_2.addWidget(self.actionbitscores)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
-        self.verticalLayout.addWidget(self.groupBox)
+        self.horizontalLayout_4.addWidget(self.groupBox)
+        self.verticalLayout.addLayout(self.horizontalLayout_4)
         SeqDivA.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(SeqDivA)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 696, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 696, 20))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -129,7 +140,10 @@ class Ui_SeqDivA(object):
         self.calculate.setText(_translate("SeqDivA", "Calculate Similarity"))
         self.clear.setText(_translate("SeqDivA", "Clear"))
         self.Close.setText(_translate("SeqDivA", "Close"))
-        self.groupBox.setTitle(_translate("SeqDivA", "Matrix Type:"))
+        self.groupBox_2.setTitle(_translate("SeqDivA", "Input Database"))
+        self.protein.setText(_translate("SeqDivA", "Protein"))
+        self.dna.setText(_translate("SeqDivA", "DNA"))
+        self.groupBox.setTitle(_translate("SeqDivA", "Matrix Type"))
         self.similarity.setText(_translate("SeqDivA", "Similarity"))
         self.actionIdentity.setText(_translate("SeqDivA", "Identity"))
         self.actionbitscores.setText(_translate("SeqDivA", "Bit-Scores"))

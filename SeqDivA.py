@@ -15,11 +15,13 @@ class Calculation(QtCore.QThread):
     prog_range = QtCore.pyqtSignal(int)
     onfinished = QtCore.pyqtSignal(np.ndarray)
 
-    def __init__(self, method, fasta):
+    def __init__(self, method, fasta, alphabet):
         QtCore.QThread.__init__(self)
 
         self.fasta = fasta
         self.method = method
+        self.alphabet = alphabet
+        self.alphabet_translate = {'protein': '-sprotein1', 'dna': '-snucleotide1'}
 
     def run(self):
         alignments = list(SeqIO.parse(self.fasta, 'fasta'))
@@ -34,8 +36,9 @@ class Calculation(QtCore.QThread):
             SeqIO.write(alignments[case], 'caso_base.fasta', 'fasta')
             SeqIO.write(alignments[case + 1:], 'resto_casos.fasta', 'fasta')
 
-            command = self.method + ' -auto -asequence=caso_base.fasta -bsequence=resto_casos.fasta -gapopen=10 ' \
-                                    '-gapextend=0.5 -outfile=salida.txt'
+            command = f'{self.method} -auto -asequence=caso_base.fasta {self.alphabet_translate[self.alphabet]} ' \
+                      f'-bsequence=resto_casos.fasta -gapopen=10 -gapextend=0.5 -outfile=salida.txt'
+
             os.system(command)
 
             datos = data_extractor()
@@ -64,10 +67,11 @@ class Window(QtWidgets.QMainWindow):
         self.calculation_method = 'needle'
         self.file = ''
         self.matrix_type = 'similarity'
+        self.alphabet = 'protein'
         self.resultados = []
 
         # Threads
-        self.threadWorker = Calculation(self.calculation_method, self.file)
+        self.threadWorker = Calculation(self.calculation_method, self.file, self.alphabet)
         self.blastthread = BlastCalculation(self.calculation_method, self.file)
 
 
@@ -85,6 +89,8 @@ class Window(QtWidgets.QMainWindow):
         self.threadWorker.progress.connect(self.setprogress)
         self.threadWorker.onfinished.connect(self.results)
         self.blastthread.onfinished.connect(self.blastfinish)
+        self.ui.protein.toggled.connect(self.proteinselect)
+        self.ui.dna.toggled.connect(self.dnaselect)
 
     def setprogress(self, i):
         self.ui.progressBar.setValue(i)
@@ -162,6 +168,7 @@ class Window(QtWidgets.QMainWindow):
             else:
                 self.threadWorker.fasta = self.file
                 self.threadWorker.method = self.calculation_method
+                self.threadWorker.alphabet = self.alphabet
                 self.threadWorker.start()
 
     def results(self, result):
@@ -188,6 +195,11 @@ class Window(QtWidgets.QMainWindow):
         matrix.exec_()
         self.ui.calculate.setDisabled(False)
 
+    def proteinselect(self):
+        self.alphabet = 'protein'
+
+    def dnaselect(self):
+        self.alphabet = 'dna'
 
 
 if __name__ == '__main__':
