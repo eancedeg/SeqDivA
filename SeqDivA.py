@@ -8,6 +8,8 @@ from calculate.FileManager import matrix_header, data_extractor, cuadrate_matrix
 from calculate.blast import BlastCalculation
 import numpy as np
 import os
+import shutil
+import subprocess
 
 
 class Calculation(QtCore.QThread):
@@ -39,7 +41,7 @@ class Calculation(QtCore.QThread):
             command = f'{self.method} -auto -asequence=caso_base.fasta {self.alphabet_translate[self.alphabet]} ' \
                       f'-bsequence=resto_casos.fasta -gapopen=10 -gapextend=0.5 -outfile=salida.txt'
 
-            os.system(command)
+            subprocess.run(command, shell=True, check=True)
 
             datos = data_extractor()
             data_identity = [0] * (len(header) - 1 - len(datos[0])) + [100] + datos[0]
@@ -70,6 +72,9 @@ class Window(QtWidgets.QMainWindow):
         self.alphabet = 'protein'
         self.resultados = []
 
+        self.show()
+        self.check_method()
+
         # Threads
         self.threadWorker = Calculation(self.calculation_method, self.file, self.alphabet)
         self.blastthread = BlastCalculation(self.calculation_method, self.file)
@@ -91,6 +96,18 @@ class Window(QtWidgets.QMainWindow):
         self.blastthread.onfinished.connect(self.blastfinish)
         self.ui.protein.toggled.connect(self.proteinselect)
         self.ui.dna.toggled.connect(self.dnaselect)
+
+    def check_method(self):
+        if not shutil.which(self.calculation_method):
+            msg = QMessageBox()
+            msg.setWindowTitle('Dependency Problem')
+            msg.setText('Emboss is not installed')
+            msg.setInformativeText('A dependency problem has been detected, check that the emboss package is installed'
+                                   ' on your system')
+            msg.setIcon(QMessageBox.Information)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec_()
+            msg.destroy()
 
     def setprogress(self, i):
         self.ui.progressBar.setValue(i)
