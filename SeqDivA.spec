@@ -9,7 +9,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[('examples', 'examples'),
-           ('bin', 'bin')],
+           ('seqdiva-ico.ico', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={

@@ -37,7 +37,7 @@ class Calculation(QtCore.QThread):
             SeqIO.write(alignments[case], 'caso_base.fasta', 'fasta')
             SeqIO.write(alignments[case + 1:], 'resto_casos.fasta', 'fasta')
 
-            command = f'.\\bin\\{self.method} -auto -asequence=caso_base.fasta {self.alphabet_translate[self.alphabet]} ' \
+            command = f'{self.method} -auto -asequence=caso_base.fasta {self.alphabet_translate[self.alphabet]} ' \
                       f'-bsequence=resto_casos.fasta -gapopen=10 -gapextend=0.5 -outfile=salida.txt'
 
             subprocess.run(command, shell=True, check=True)
