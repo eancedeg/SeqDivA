@@ -3,8 +3,8 @@ channels:
   - defaults
 dependencies:
   - python=3.8
-  - biopython==1.77
+  - biopython
   - ipython
-  - matplotlib=3.3.1
+  - matplotlib=3.2
   - pandas
 prefix: /home/eancedeg/miniconda3/envs/SeqDivA
